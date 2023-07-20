@@ -10,7 +10,7 @@ const NewTodo = () => {
   const client = useQueryClient();
 
   const { mutate: create } = useMutation({
-    mutationFn: createTodo,
+    mutationFn: () => createTodo(title),
     // onSuccess: () => {
     //   client.invalidateQueries({ queryKey: ['todos', 'all'] });
     // },
@@ -29,7 +29,7 @@ const NewTodo = () => {
   const submit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     if (title) {
-      create(title);
+      create();
       setTitle('');
     }
   };

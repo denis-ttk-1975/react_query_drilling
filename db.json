@@ -3,11 +3,11 @@
     {
       "id": 1,
       "title": "Learn React Query",
-      "completed": false
+      "completed": true
     },
     {
       "title": "React 18",
-      "completed": false,
+      "completed": true,
       "id": 2
     },
     {
@@ -19,6 +19,16 @@
       "title": "Vue",
       "completed": false,
       "id": 4
+    },
+    {
+      "title": "Learn Angular",
+      "completed": false,
+      "id": 5
+    },
+    {
+      "title": "piramida",
+      "completed": true,
+      "id": 6
     }
   ]
 }
