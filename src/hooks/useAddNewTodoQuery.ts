@@ -12,11 +12,18 @@ const useAddNewTodoQuery = (title: string) => {
     mutationFn: () => createTodo(title),
     onSuccess: (newTodo) => {
       // client.getQueryData(['todos', 'all'])
-      client.setQueriesData<Todo[]>(['todos'], (oldTodos) => {
+      client.setQueriesData<Todo[]>(['todos', 'all'], (oldTodos) => {
+        return [...((oldTodos as Todo[]) || []), newTodo];
+      });
+      client.setQueriesData<Todo[]>(['todos', 'open'], (oldTodos) => {
         return [...((oldTodos as Todo[]) || []), newTodo];
       });
       client.invalidateQueries({
-        queryKey: ['todos'],
+        queryKey: ['todos', 'all'],
+        refetchType: 'none',
+      });
+      client.invalidateQueries({
+        queryKey: ['todos', 'open'],
         refetchType: 'none',
       });
     },
