@@ -17,18 +17,23 @@
     },
     {
       "title": "Vue",
-      "completed": false,
+      "completed": true,
       "id": 4
     },
     {
       "title": "Learn Angular",
-      "completed": false,
+      "completed": true,
       "id": 5
     },
     {
       "title": "piramida",
       "completed": true,
       "id": 6
+    },
+    {
+      "title": "yogurt",
+      "completed": false,
+      "id": 7
     }
   ]
 }

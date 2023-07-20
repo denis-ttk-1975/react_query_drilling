@@ -3,28 +3,30 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { createTodo } from '../services/todos';
 import { Todo } from '../types/todo';
+import { useAddNewTodoQuery } from './../hooks/useAddNewTodoQuery';
 
 const NewTodo = () => {
   const [title, setTitle] = useState('');
 
   const client = useQueryClient();
+  const { mutate: create } = useAddNewTodoQuery(title);
 
-  const { mutate: create } = useMutation({
-    mutationFn: () => createTodo(title),
-    // onSuccess: () => {
-    //   client.invalidateQueries({ queryKey: ['todos', 'all'] });
-    // },
-    onSuccess: (newTodo) => {
-      // client.getQueryData(['todos', 'all'])
-      client.setQueriesData<Todo[]>(['todos', 'all'], (oldTodos) => {
-        return [...(oldTodos || []), newTodo];
-      });
-      client.invalidateQueries({
-        queryKey: ['todos', 'all'],
-        refetchType: 'none',
-      });
-    },
-  });
+  // const { mutate: create } = useMutation({
+  //   mutationFn: () => createTodo(title),
+  //   // onSuccess: () => {
+  //   //   client.invalidateQueries({ queryKey: ['todos', 'all'] });
+  //   // },
+  //   onSuccess: (newTodo) => {
+  //     // client.getQueryData(['todos', 'all'])
+  //     client.setQueriesData<Todo[]>(['todos', 'all'], (oldTodos) => {
+  //       return [...(oldTodos || []), newTodo];
+  //     });
+  //     client.invalidateQueries({
+  //       queryKey: ['todos', 'all'],
+  //       refetchType: 'none',
+  //     });
+  //   },
+  // });
 
   const submit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
